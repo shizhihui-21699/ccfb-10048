@@ -1,0 +1,34 @@
+[package]
+name = "noise-rs"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.70"
+description = "A from-scratch Noise Protocol Framework implementation (XX / IK, X25519/X448, ChaChaPoly / AESGCM, BLAKE2s / SHA256)"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "noise_rs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "noise-cli"
+path = "src/bin/noise-cli.rs"
+
+[dependencies]
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+x448 = { version = "0.14.0-pre.12", features = ["static_secrets"] }
+chacha20poly1305 = "0.10"
+aes-gcm = "0.10"
+blake2 = "0.10"
+sha2 = "0.10"
+zeroize = { version = "1", features = ["derive"] }
+getrandom = "0.2"
+subtle = "2"
+hex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
+lto = true
